@@ -12,7 +12,6 @@ export default function LoginData() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [loginbool, setLoginbool] = useState(false);
   const create = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
@@ -51,7 +50,7 @@ export default function LoginData() {
       });
   };
   return (
-    <div>
+    <div className={styles.loginpage}>
       <h3>로그인 또는 회원가입 페이지 입니다</h3>
       <label>이메일</label>
       <input

@@ -1,14 +1,20 @@
-button{
-    color:white;
+button {
+    color: white;
     border-radius: 10px;
-    border:none;
-    font-size:1.1rem;
-    margin:10px 20px;
-    padding:5px 10px;
+    border: none;
+    font-size: 1.1rem;
+    margin: 10px 20px;
+    padding: 5px 10px;
 }
-.enter{
+
+.enter {
     background-color: green;
 }
-.login{
+
+.login {
     background-color: blue;
+}
+
+.loginpage {
+    text-align: center;
 }
