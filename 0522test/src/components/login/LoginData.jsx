@@ -1,28 +1,21 @@
 import React, { useState } from "react";
 import styles from "./logindata.module.css";
-import { auth } from "../database/firebase";
+import { auth } from "../../database/firebase";
 import { useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { Link } from "react-router-dom";
 export default function LoginData() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
   const create = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        setUser({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-        });
         alert("회원가입이 되었습니다");
       })
       .catch((error) => {
@@ -31,9 +24,12 @@ export default function LoginData() {
         console.log(errorCode, errorMessage);
         if (errorCode === "auth/email-already-in-use")
           alert("이미 가입되어 있는 계정입니다");
+        else if (errorCode === "auth/invalid-email")
+          alert("입력하지 않았습니다");
       });
   };
-  const login = () => {
+  const login = (e) => {
+    e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -43,6 +39,7 @@ export default function LoginData() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
         if (error.code) {
           alert("등록되지 않은 이메일이거나 비밀번호가 잘못되었습니다");
         }
