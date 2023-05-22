@@ -34,7 +34,11 @@ export default function LoginData() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        navigate("/main");
+        navigate("/main", {
+          state: {
+            email: user.email,
+          },
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
